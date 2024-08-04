@@ -11,5 +11,5 @@ void ServoWheel::setSpeed(int speed) {
 }
 
 void ServoWheel::stop() {
-  wheel.write(90);
+  wheel.write();
 }
