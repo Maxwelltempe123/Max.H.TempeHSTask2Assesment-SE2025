@@ -12,7 +12,7 @@ void system::init() {
 
 void system::moveForward() {
   leftWheel.setSpeed(180);
-  rightWheel.setSpeed(0);
+  rightWheel.setSpeed(180);
 }
 
 void system::turnLeft() {
