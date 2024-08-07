@@ -1,11 +1,11 @@
-#include "system.h"
+#include "System.h"
 
-#define LEFT_Wheel_PIN 9
-#define RIGHT_Wheel_PIN 10
-#define LEFT_LINE_SENSOR_PIN 12
-#define RIGHT_LINE_SENSOR_PIN 13
+#define LEFT_MOTOR_PIN 9
+#define RIGHT_MOTOR_PIN 10
+#define LEFT_LINE_SENSOR_PIN A0
+#define RIGHT_LINE_SENSOR_PIN A1
 
-system system(LEFT_Wheel_PIN, RIGHT_Wheel_PIN, LEFT_LINE_SENSOR_PIN, RIGHT_LINE_SENSOR_PIN);
+System system(LEFT_MOTOR_PIN, RIGHT_MOTOR_PIN, LEFT_LINE_SENSOR_PIN, RIGHT_LINE_SENSOR_PIN);
 
 void setup() {
   Serial.begin(9600);
@@ -13,6 +13,6 @@ void setup() {
 }
 
 void loop() {
-  system.update();
+  system.followLine();
   delay(100);
 }

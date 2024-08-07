@@ -11,5 +11,5 @@ void ServoMotor::setSpeed(int speed) {
 }
 
 void ServoMotor::stop() {
-  motor.write(90); // 90 is typically the stop position
+  motor.write(90); 
 }

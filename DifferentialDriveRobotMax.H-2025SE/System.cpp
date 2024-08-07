@@ -1,50 +1,45 @@
 #include "System.h"
 
-system::system(int leftWheelPin, int rightWheelPin, int trigPin, int echoPin, int leftLineSensorPin, int centerLineSensorPin, int rightLineSensorPin)
-  : leftWheel(leftWheelPin), rightWheel(rightWheelPin), leftLineSensor(leftLineSensorPin), rightLineSensor(rightLineSensorPin) {}
+System::System(int leftMotorPin, int rightMotorPin, int leftLineSensorPin, int rightLineSensorPin)
+  : leftMotor(leftMotorPin), rightMotor(rightMotorPin),
+    leftLineSensor(leftLineSensorPin), rightLineSensor(rightLineSensorPin) {}
 
-void system::init() {
-  leftWheel.attach();
-  rightWheel.attach();
+void System::init() {
+  leftMotor.attach();
+  rightMotor.attach();
   leftLineSensor.init();
   rightLineSensor.init();
 }
 
-void system::moveForward() {
-  leftWheel.setSpeed(180);
-  rightWheel.setSpeed(180);
+void System::moveForward() {
+  leftMotor.setSpeed(180);
+  rightMotor.setSpeed(0);
 }
 
-void system::turnLeft() {
-  leftWheel.setSpeed(0);
-  rightWheel.setSpeed(180);
+void System::turnLeft() {
+  leftMotor.setSpeed(0);
+  rightMotor.setSpeed(180);
 }
 
-void system::turnRight() {
-  leftWheel.setSpeed(180);
-  rightWheel.setSpeed(0);
+void System::turnRight() {
+  leftMotor.setSpeed(180);
+  rightMotor.setSpeed(0);
 }
 
-void system::stop() {
-  leftWheel.stop();
-  rightWheel.stop();
+void System::stop() {
+  leftMotor.stop();
+  rightMotor.stop();
 }
 
-void system::followLine() {
+void System::followLine() {
   int leftValue = leftLineSensor.readValue();
   int rightValue = rightLineSensor.readValue();
-
-  if (leftValue < 500) {
-    turnLeft();
-  }
-  elif (rightValue < 500) {
+  
+  if (leftValue < 500 && rightValue >= 500) {
     turnRight();
+  } else if (rightValue < 500 && leftValue >= 500) {
+    turnLeft();
+  } else {
+    moveForward();
   }
-  else {
-    stop();
-  }
-
-
-void system::update() {
-  followLine();
 }
