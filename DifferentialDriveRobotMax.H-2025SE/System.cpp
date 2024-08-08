@@ -13,17 +13,20 @@ void System::init() {
 
 void System::moveForward() {
   leftMotor.setSpeed(180);
-  rightMotor.setSpeed(0);
+  rightMotor.setSpeed(180);
+  delay(300)
 }
 
 void System::turnLeft() {
   leftMotor.setSpeed(0);
   rightMotor.setSpeed(180);
+  delay(300)
 }
 
 void System::turnRight() {
   leftMotor.setSpeed(180);
   rightMotor.setSpeed(0);
+  delay(300)
 }
 
 void System::stop() {
@@ -35,9 +38,9 @@ void System::followLine() {
   int leftValue = leftLineSensor.readValue();
   int rightValue = rightLineSensor.readValue();
   
-  if (leftValue < 500 && rightValue >= 500) {
+  if (leftValue < 40 && rightValue >= 40) {
     turnRight();
-  } else if (rightValue < 500 && leftValue >= 500) {
+  } else if (rightValue < 40 && leftValue >= 40) {
     turnLeft();
   } else {
     moveForward();

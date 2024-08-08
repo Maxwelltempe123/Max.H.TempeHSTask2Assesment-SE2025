@@ -7,7 +7,7 @@ ServoMotor leftServo(LEFT_SERVO_PIN);
 ServoMotor rightServo(RIGHT_SERVO_PIN);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   leftServo.attach();
   rightServo.attach();
   Serial.println("start servo");
