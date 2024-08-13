@@ -14,19 +14,16 @@ void System::init() {
 void System::moveForward() {
   leftMotor.setSpeed(180);
   rightMotor.setSpeed(180);
-  delay(300)
 }
 
 void System::turnLeft() {
   leftMotor.setSpeed(0);
   rightMotor.setSpeed(180);
-  delay(300)
 }
 
 void System::turnRight() {
   leftMotor.setSpeed(180);
   rightMotor.setSpeed(0);
-  delay(300)
 }
 
 void System::stop() {
