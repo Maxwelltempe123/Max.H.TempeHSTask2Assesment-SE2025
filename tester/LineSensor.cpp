@@ -8,5 +8,5 @@ void LineSensor::init() {
 }
 
 bool LineSensor::isLineDetected() {
-  return digitalRead(pin) == HIGH;
+  return analogRead(pin) < 40;
 }

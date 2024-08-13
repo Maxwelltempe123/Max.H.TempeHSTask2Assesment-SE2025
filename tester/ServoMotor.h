@@ -12,7 +12,6 @@ class ServoMotor {
     ServoMotor(int pin);
     void attach();
     void setSpeed(int speed);
-    void stop();
 };
 
 #endif
