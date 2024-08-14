@@ -1,5 +1,6 @@
 #include "ServoMotor.h"
 #include "LineSensor.h"
+#include "LedArray.h"
 
 #define LEFT_MOTOR_PIN 9
 #define RIGHT_MOTOR_PIN 10
@@ -16,8 +17,8 @@ LineSensor rightSensor(RIGHT_LINE_SENSOR_PIN);
 void setup() {
   Serial.begin(9600);
   
-  leftMotor.attach(LEFT_MOTOR_PIN, 0, 90, 180);
-  rightMotor.attach(RIGHT_MOTOR_PIN, 0, 90, 180);
+  leftMotor.attach();
+  rightMotor.attach();
   
   leftSensor.init();
   rightSensor.init();
@@ -47,8 +48,8 @@ void loop() {
     rightMotor.setSpeed(60);
     Serial.println("following line");
   } else if (leftLineDetected) {
-    leftMotor.setSpeed(90);
-    rightMotor.setSpeed(60);
+    leftMotor.setSpeed(120);
+    rightMotor.setSpeed(90);
     Serial.println("left turn");
   } else if (rightLineDetected) {
     rightMotor.setSpeed(90);
@@ -60,5 +61,5 @@ void loop() {
     Serial.println("stop");
   }
 
-  delay(100);
+  delay(1000);
 }
