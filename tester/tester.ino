@@ -16,8 +16,8 @@ LineSensor rightSensor(RIGHT_LINE_SENSOR_PIN);
 void setup() {
   Serial.begin(9600);
   
-  leftMotor.attach();
-  rightMotor.attach();
+  leftMotor.attach(LEFT_MOTOR_PIN, 0, 90, 180);
+  rightMotor.attach(RIGHT_MOTOR_PIN, 0, 90, 180);
   
   leftSensor.init();
   rightSensor.init();
