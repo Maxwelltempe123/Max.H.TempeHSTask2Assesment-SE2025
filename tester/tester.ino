@@ -29,37 +29,24 @@ void loop() {
   bool rightLineDetected = rightSensor.isLineDetected();
 
 
- // if (leftLineDetected) {
-    //Serial.println("Left detected");
-  //}
-  //else if (rightLineDetected) {
-   // Serial.println("Right detected");
- // }
-  //else if (leftLineDetected && rightLineDetected) {
-   // Serial.println("Both detected following");
-  //}
-  //Serial.print("Left detected ");
-  //Serial.print(leftLineDetected);
-  //Serial.print("Right detected ");
-  //Serial.println(rightLineDetected);
 
   if (leftLineDetected && rightLineDetected) {
-    leftMotor.setSpeed(120);
-    rightMotor.setSpeed(60);
+    leftMotor.setSpeed(1600);
+    rightMotor.setSpeed(1450);
     Serial.println("following line");
   } else if (leftLineDetected) {
-    leftMotor.setSpeed(120);
-    rightMotor.setSpeed(90);
+    leftMotor.setSpeed(1500);
+    rightMotor.setSpeed(1450);
     Serial.println("left turn");
   } else if (rightLineDetected) {
-    rightMotor.setSpeed(90);
-    leftMotor.setSpeed(120);
+    rightMotor.setSpeed(1500);
+    leftMotor.setSpeed(1600);
     Serial.println("right turn");
   } else {
-    leftMotor.setSpeed(90);
-    rightMotor.setSpeed(90);
+    leftMotor.setSpeed(1500);
+    rightMotor.setSpeed(1500);
     Serial.println("stop");
   }
 
-  delay(1000);
+  delay(75);
 }

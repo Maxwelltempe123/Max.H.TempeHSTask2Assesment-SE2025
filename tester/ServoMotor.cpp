@@ -7,6 +7,6 @@ void ServoMotor::attach() {
 }
 
 void ServoMotor::setSpeed(int speed) {
-  motor.write(speed);
+  motor.writeMicroseconds(speed);
 }
 
