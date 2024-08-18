@@ -3,13 +3,13 @@
 ServoMotor::ServoMotor(int pin) : pin(pin) {}
 
 void ServoMotor::attach() {
-  motor.attach(pin);
+    motor.attach(pin);
 }
 
-void ServoMotor::setSpeed(int speed) {
-  motor.write(speed);
+void ServoMotor::setSpeed(int microseconds) {
+    motor.writeMicroseconds(microseconds);
 }
 
 void ServoMotor::stop() {
-  motor.write(90); 
+    motor.writeMicroseconds(1500);
 }

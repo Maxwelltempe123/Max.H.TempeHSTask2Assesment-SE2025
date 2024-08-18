@@ -1,10 +1,33 @@
-//#include "LedArray.h"
-//#include "Arduino_LED_Matrix.h"
+#include "LedArray.h"
 
+LedArray::LedArray() : ledMatrix(LedMatrix()) {}
 
-//ArduinoLEDMatrix matrix;
+void LedArray::init() {
+    ledMatrix.begin();
+    ledMatrix.setBrightness(15);
+}
 
-//void setup() {
-  //Serial.begin(115200);
-  //matrix.begin();
-//}
+void LedArray::displayHappyFace() {
+    drawBitmap(happyFace);
+}
+
+void LedArray::displaySadFace() {
+    drawBitmap(sadFace);
+}
+
+void LedArray::displayLeftArrow() {
+    drawBitmap(leftArrow);
+}
+
+void LedArray::displayRightArrow() {
+    drawBitmap(rightArrow);
+}
+
+void LedArray::drawBitmap(const uint8_t bitmap[8][12]) {
+    for (int y = 0; y < 8; y++) {
+        for (int x = 0; x < 12; x++) {
+            ledMatrix.drawPixel(x, y, bitmap[y][x] ? HIGH : LOW);
+        }
+    }
+    ledMatrix.show();
+}

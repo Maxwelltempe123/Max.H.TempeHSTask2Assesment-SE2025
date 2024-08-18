@@ -1,34 +1,68 @@
-//#include "LEDArray.h"
-//#include <Arduino.h>
+#ifndef LED_ARRAY_H
+#define LED_ARRAY_H
 
-//LEDArray::LEDArray(int dataPin, int clockPin, int latchPin)
-  //: dataPin(dataPin), clockPin(clockPin), latchPin(latchPin) {}
+#include <Arduino.h>
+#include <LedMatrix.h>
 
-//void LEDArray::init() {
-  //pinMode(dataPin, OUTPUT);
-  //pinMode(clockPin, OUTPUT);
-  //pinMode(latchPin, OUTPUT);
-//}
+class LedArray {
+public:
+    LedArray();
 
-//void LEDArray::clear() {
-  //digitalWrite(latchPin, LOW);
-  //shiftOut(dataPin, clockPin, LSBFIRST, 0x00);
-  //shiftOut(dataPin, clockPin, LSBFIRST, 0x00);
-  //digitalWrite(latchPin, HIGH);
-//}
+    void init();
 
-//void LEDArray::displayLineDetected() {
-  //digitalWrite(latchPin, LOW);
-  // Example pattern for line detected
-  //shiftOut(dataPin, clockPin, LSBFIRST, 0xFF); // Modify as per your matrix setup
-  //shiftOut(dataPin, clockPin, LSBFIRST, 0x00);
-  //digitalWrite(latchPin, HIGH);
-//}
+    void displayHappyFace();
+    void displaySadFace();
+    void displayLeftArrow();
+    void displayRightArrow();
 
-//void LEDArray::displayStop() {
-  //digitalWrite(latchPin, LOW);
-  // Example pattern for stop
-  //shiftOut(dataPin, clockPin, LSBFIRST, 0x00); // Modify as per your matrix setup
-  //shiftOut(dataPin, clockPin, LSBFIRST, 0xFF);
-  //digitalWrite(latchPin, HIGH);
-//}
+private:
+    LedMatrix ledMatrix;
+
+    const uint8_t happyFace[8][12] = {
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+        {1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+        {1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
+    };
+
+    const uint8_t sadFace[8][12] = {
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+        {1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+        {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1},
+        {1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+        {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+        {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0}
+    };
+
+    const uint8_t leftArrow[8][12] = {
+        {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}
+    };
+
+    const uint8_t rightArrow[8][12] = {
+        {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}
+    };
+
+    void drawBitmap(const uint8_t bitmap[8][12]);
+};
+
+#endif

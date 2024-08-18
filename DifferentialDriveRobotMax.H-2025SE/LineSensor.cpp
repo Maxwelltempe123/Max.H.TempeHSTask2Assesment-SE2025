@@ -1,12 +1,13 @@
 #include "LineSensor.h"
 #include <Arduino.h>
 
-LineSensor::LineSensor(int pin) : pin(pin) {}
+LineSensor::LineSensor(int pin, int threshold) : pin(pin), threshold(threshold) {}
 
 void LineSensor::init() {
-  pinMode(pin, INPUT);
+    pinMode(pin, INPUT);
 }
 
-int LineSensor::readValue() {
-  return analogRead(pin);
+bool LineSensor::isLineDetected() {
+    int sensorValue = analogRead(pin);
+    return sensorValue < threshold; 
 }

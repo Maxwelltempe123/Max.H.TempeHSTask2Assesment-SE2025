@@ -1,14 +1,15 @@
-#ifndef LINESENSOR_H
-#define LINESENSOR_H
+#ifndef LINE_SENSOR_H
+#define LINE_SENSOR_H
 
 class LineSensor {
-  private:
-    int pin;
-  
-  public:
-    LineSensor(int pin);
+public:
+    LineSensor(int pin, int threshold);
     void init();
-    int readValue();
+    bool isLineDetected();
+
+private:
+    int pin;
+    int threshold;
 };
 
 #endif

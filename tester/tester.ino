@@ -1,6 +1,7 @@
 #include "ServoMotor.h"
 #include "LineSensor.h"
 #include "LedArray.h"
+#include <Arduino.h>
 
 #define LEFT_MOTOR_PIN 9
 #define RIGHT_MOTOR_PIN 10
@@ -14,6 +15,8 @@ ServoMotor rightMotor(RIGHT_MOTOR_PIN);
 LineSensor leftSensor(LEFT_LINE_SENSOR_PIN);
 LineSensor rightSensor(RIGHT_LINE_SENSOR_PIN);
 
+LedArray ledArray;
+
 void setup() {
   Serial.begin(9600);
   
@@ -22,31 +25,37 @@ void setup() {
   
   leftSensor.init();
   rightSensor.init();
+
+  ledArray.init();
 }
 
 void loop() {
   bool leftLineDetected = leftSensor.isLineDetected();
   bool rightLineDetected = rightSensor.isLineDetected();
 
+  Serial.print("Left Line Detected: ");
+  Serial.println(leftLineDetected);
+  Serial.print("Right Line Detected: ");
+  Serial.println(rightLineDetected);
 
 
   if (leftLineDetected && rightLineDetected) {
     leftMotor.setSpeed(1600);
     rightMotor.setSpeed(1450);
-    Serial.println("following line");
+    ledArray.displayHappyFace();
   } else if (leftLineDetected) {
     leftMotor.setSpeed(1500);
     rightMotor.setSpeed(1450);
-    Serial.println("left turn");
+    ledArray.displayLeftArrow();
   } else if (rightLineDetected) {
     rightMotor.setSpeed(1500);
     leftMotor.setSpeed(1600);
-    Serial.println("right turn");
+    ledArray.displayRightArrow();
   } else {
     leftMotor.setSpeed(1500);
     rightMotor.setSpeed(1500);
-    Serial.println("stop");
+    ledArray.displaySadFace();
   }
 
-  delay(75);
+  delay(100);
 }

@@ -1,18 +1,33 @@
-//#ifndef LEDARRAY_H
-//#define LEDARRAY_H
+#include "LedArray.h"
 
-//class LEDArray {
-  //private:
-    //int dataPin;
-    //int clockPin;
-    //int latchPin;
-  
-  //public:
-    //LEDArray(int dataPin, int clockPin, int latchPin);
-    //void init();
-    //void displayLineDetected();
-    //void displayStop();
-    //void clear();
-//};
+LedArray::LedArray() : ledMatrix(LedMatrix()) {}
 
-//#endif
+void LedArray::init() {
+    ledMatrix.begin();
+    ledMatrix.setBrightness(15); 
+}
+
+void LedArray::displayHappyFace() {
+    drawBitmap(happyFace);
+}
+
+void LedArray::displaySadFace() {
+    drawBitmap(sadFace);
+}
+
+void LedArray::displayLeftArrow() {
+    drawBitmap(leftArrow);
+}
+
+void LedArray::displayRightArrow() {
+    drawBitmap(rightArrow);
+}
+
+void LedArray::drawBitmap(const uint8_t bitmap[8][12]) {
+    for (int y = 0; y < 8; y++) {
+        for (int x = 0; x < 12; x++) {
+            ledMatrix.drawPixel(x, y, bitmap[y][x] ? HIGH : LOW);
+        }
+    }
+    ledMatrix.show();
+}
