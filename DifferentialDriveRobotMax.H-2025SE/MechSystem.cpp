@@ -16,16 +16,16 @@ void MechSystem::followLine() {
     updateSensorStates(leftDetected, rightDetected);
 
     if (leftDetected && rightDetected) {
-        leftMotor.setSpeed(1800);
-        rightMotor.setSpeed(1800);
+        leftMotor.setSpeed(1540);
+        rightMotor.setSpeed(1490);
         ledArray.displayHappyFace();
     } else if (leftDetected) {
         leftMotor.stop();
-        rightMotor.setSpeed(1800);
+        rightMotor.setSpeed(1490);
         ledArray.displayLeftArrow();
     } else if (rightDetected) {
         rightMotor.stop();
-        leftMotor.setSpeed(1800);
+        leftMotor.setSpeed(1540);
         ledArray.displayRightArrow();
     } else {
         leftMotor.stop();

@@ -8,7 +8,7 @@ void LineSensor::init() {
 }
 
 bool LineSensor::isLineDetected() {
-  return analogRead(pin) < 36;
+  return analogRead(pin) < 21.5;
 }
 //bool LineSensor::noLineDetected(){
   //return analogRead(pin) > 40;

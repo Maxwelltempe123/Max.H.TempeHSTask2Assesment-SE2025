@@ -2,7 +2,7 @@
 #define LED_ARRAY_H
 
 #include <Arduino.h>
-#include <LedMatrix.h>
+#include "Arduino_LED_Matrix.h"
 
 class LedArray {
 public:
@@ -16,7 +16,7 @@ public:
     void displayRightArrow();
 
 private:
-    LedMatrix ledMatrix;
+    ArduinoLEDMatrix ledMatrix;
 
     const uint8_t happyFace[8][12] = {
         {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
