@@ -40,16 +40,16 @@ void loop() {
 
 
   if (leftLineDetected && rightLineDetected) {
-    leftMotor.setSpeed(1600);
-    rightMotor.setSpeed(1450);
+    leftMotor.setSpeed(1520);
+    rightMotor.setSpeed(1480);
     //ledArray.displayHappyFace();
   } else if (leftLineDetected) {
     leftMotor.setSpeed(1500);
-    rightMotor.setSpeed(1450);
+    rightMotor.setSpeed(1480);
     //ledArray.displayLeftArrow();
   } else if (rightLineDetected) {
     rightMotor.setSpeed(1500);
-    leftMotor.setSpeed(1600);
+    leftMotor.setSpeed(1520);
     //ledArray.displayRightArrow();
   } else {
     leftMotor.setSpeed(1500);
