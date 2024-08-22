@@ -7,5 +7,5 @@ int LineSensor::readValue() {
 }
 
 bool LineSensor::isOnLine(int threshold) {
-    return readValue() < threshold;
+    return readValue() > threshold;
 }

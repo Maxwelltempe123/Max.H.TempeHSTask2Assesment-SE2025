@@ -7,10 +7,11 @@ class ServoMotor {
 private:
     Servo motor;
     int pin;
-    int direction;
+    //int direction;
 
 public:
-    ServoMotor(int motorPin, int motorDirection);
+    //ServoMotor(int motorPin, int motorDirection);
+    ServoMotor(int motorPin);
     void attach();
     void setSpeed(int speed);
     void stop();
