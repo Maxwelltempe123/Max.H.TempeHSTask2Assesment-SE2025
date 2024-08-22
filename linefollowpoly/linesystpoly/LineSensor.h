@@ -10,7 +10,7 @@ private:
 public:
     LineSensor(int sensorPin);
     int readValue();
-    bool isOnLine();
+    bool isOnLine(int threshold);  
 };
 
 #endif

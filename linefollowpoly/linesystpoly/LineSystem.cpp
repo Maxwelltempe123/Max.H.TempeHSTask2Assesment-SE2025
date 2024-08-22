@@ -1,5 +1,9 @@
 #include "LineSystem.h"
 
+#define LEFT_THRESHOLD 31
+#define RIGHT_THRESHOLD 32
+#define OFF_LINE_THRESHOLD 40
+
 LineSystem::LineSystem()
     : leftMotor(9, 1), rightMotor(10, -1),
       leftSensor(A2), rightSensor(A3) {}
@@ -17,20 +21,20 @@ void LineSystem::followLine() {
     int leftValue = leftSensor.readValue();
     int rightValue = rightSensor.readValue();
 
-    if (leftSensor.isOnLine() && rightSensor.isOnLine()) {
-        // Both sensors on the line
-        leftMotor.setSpeed(500);
-        rightMotor.setSpeed(500);
-    } else if (!leftSensor.isOnLine() && rightValue > 40) {
-        // Left off the line, right on the line
-        leftMotor.setSpeed(0);
-        rightMotor.setSpeed(500);
-    } else if (!rightSensor.isOnLine() && leftValue > 40) {
-        // Right off the line, left on the line
-        leftMotor.setSpeed(500);
-        rightMotor.setSpeed(0);
+    if (leftSensor.isOnLine(LEFT_THRESHOLD) && rightSensor.isOnLine(RIGHT_THRESHOLD)) {
+        // both sensors on the line (31 for left, 32 for right)
+        leftMotor.setSpeed(1520);
+        rightMotor.setSpeed(1480);
+    } else if (leftValue == LEFT_THRESHOLD && rightValue > OFF_LINE_THRESHOLD) {
+        // left sensor on the line (31), right sensor off the line (above 40)
+        leftMotor.setSpeed(1520);
+        rightMotor.setSpeed(1500);
+    } else if (rightValue == RIGHT_THRESHOLD && leftValue > OFF_LINE_THRESHOLD) {
+        // right sensor on the line (32), left sensor off the line (above 40)
+        leftMotor.setSpeed(1500);
+        rightMotor.setSpeed(1480);
     } else {
-        // Both sensors off the line
+        // both sensors off the line or in other states
         leftMotor.stop();
         rightMotor.stop();
     }
