@@ -1,9 +1,11 @@
-void setup() {
-  // put your setup code here, to run once:
+#include "LineSystem.h"
 
+LineSystem robot;
+
+void setup() {
+    robot.setup();
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+    robot.loop();
 }
