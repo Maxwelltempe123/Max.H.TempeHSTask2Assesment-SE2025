@@ -3,7 +3,7 @@
 
 LineSystem::LineSystem(int leftMotorPin, int rightMotorPin, int leftSensorPin, int rightSensorPin)
     : leftMotor(leftMotorPin), rightMotor(rightMotorPin),
-      leftSensor(leftSensorPin, 30, 40), rightSensor(rightSensorPin, 30, 40),
+      leftSensor(leftSensorPin, 35, 40), rightSensor(rightSensorPin, 35, 40),
       lastLeftDetectedTime(0), lastRightDetectedTime(0) {}
 
 void LineSystem::setup() {
@@ -36,26 +36,28 @@ void LineSystem::adjustMotors() {
 
     if (leftOnLine && !rightOnLine) {
         Serial.println("Pivoting Right");
-        leftMotor.setSpeed(1600);
-        rightMotor.setSpeed(1500);
-    } else if (!leftOnLine && rightOnLine) {
-        Serial.println("Pivoting Left");
         leftMotor.setSpeed(1500);
         rightMotor.setSpeed(1490);
+    } else if (!leftOnLine && rightOnLine) {
+        Serial.println("Pivoting Left");
+        leftMotor.setSpeed(1600);
+        rightMotor.setSpeed(1500);
     } else if (leftOnLine && rightOnLine) {
         Serial.println("Moving Straight");
         leftMotor.setSpeed(1600);
         rightMotor.setSpeed(1490);
     } else {
         Serial.println("Off Line, Correcting");
-        if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
-            (currentTime - lastRightDetectedTime > offLineThreshold)) {
-            leftMotor.setSpeed(1600);
-            rightMotor.setSpeed(1490);
-        } else {
-            Serial.println("Stopping");
-            leftMotor.setSpeed(1500);
-            rightMotor.setSpeed(1500);
-        }
-    }
+ }
 }
+        //if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
+            //(currentTime - lastRightDetectedTime > offLineThreshold)) {
+            //leftMotor.setSpeed(1600);
+            //rightMotor.setSpeed(1490);
+        //} else {
+            //Serial.println("Stopping");
+            //leftMotor.setSpeed(1500);
+            //rightMotor.setSpeed(1500);
+        //}
+    //}
+//}
