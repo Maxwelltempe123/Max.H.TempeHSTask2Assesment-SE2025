@@ -6,8 +6,8 @@ Servo rightMotor;
 void setup() {
     leftMotor.attach(9);
     rightMotor.attach(10);
-    leftMotor.writeMicroseconds(1520);  // Set to forward speed
-    rightMotor.writeMicroseconds(1480); // Set to forward speed
+    leftMotor.writeMicroseconds(1600);  // Set to forward speed
+    rightMotor.writeMicroseconds(1490); // Set to forward speed
 }
 
 void loop() {
