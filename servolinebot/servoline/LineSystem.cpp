@@ -3,7 +3,7 @@
 
 LineSystem::LineSystem(int leftMotorPin, int rightMotorPin, int leftSensorPin, int rightSensorPin)
     : leftMotor(leftMotorPin), rightMotor(rightMotorPin),
-      leftSensor(leftSensorPin, 30, 46), rightSensor(rightSensorPin, 28, 46),
+      leftSensor(leftSensorPin, 30, 40), rightSensor(rightSensorPin, 30, 40),
       lastLeftDetectedTime(0), lastRightDetectedTime(0) {}
 
 void LineSystem::setup() {
@@ -20,6 +20,11 @@ void LineSystem::adjustMotors() {
     bool leftOnLine = leftSensor.isOnLine();
     bool rightOnLine = rightSensor.isOnLine();
 
+    Serial.print("Left On Line: ");
+    Serial.println(leftOnLine);
+    Serial.print("Right On Line: ");
+    Serial.println(rightOnLine);
+
     unsigned long currentTime = millis();
 
     if (leftOnLine) {
@@ -30,23 +35,27 @@ void LineSystem::adjustMotors() {
     }
 
     if (leftOnLine && !rightOnLine) {
-        leftMotor.setSpeed(1520);  //forward
-        rightMotor.setSpeed(1400); //pivot right
+        Serial.println("Pivoting Right");
+        leftMotor.setSpeed(1520);
+        rightMotor.setSpeed(1400);
     } else if (!leftOnLine && rightOnLine) {
-        leftMotor.setSpeed(1600);  //pivot left
-        rightMotor.setSpeed(1480); //forward
+        Serial.println("Pivoting Left");
+        leftMotor.setSpeed(1550);
+        rightMotor.setSpeed(1420);
     } else if (leftOnLine && rightOnLine) {
-        leftMotor.setSpeed(1520);  //move straight
-        rightMotor.setSpeed(1480); //move straight
+        Serial.println("Moving Straight");
+        leftMotor.setSpeed(1550);
+        rightMotor.setSpeed(1450);
     } else {
-        //if off the line for too long, refresh
+        Serial.println("Off Line, Correcting");
         if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
             (currentTime - lastRightDetectedTime > offLineThreshold)) {
-            leftMotor.setSpeed(1600);  //pivot left
-            rightMotor.setSpeed(1400); //pivot right
+            leftMotor.setSpeed(1550);
+            rightMotor.setSpeed(1450);
         } else {
-            leftMotor.setSpeed(1500);  //stop
-            rightMotor.setSpeed(1500); //stop
+            Serial.println("Stopping");
+            leftMotor.setSpeed(1500);
+            rightMotor.setSpeed(1500);
         }
     }
 }
