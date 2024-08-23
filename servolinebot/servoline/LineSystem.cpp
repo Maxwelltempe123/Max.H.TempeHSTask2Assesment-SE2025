@@ -7,6 +7,7 @@ LineSystem::LineSystem(int leftMotorPin, int rightMotorPin, int leftSensorPin, i
       lastLeftDetectedTime(0), lastRightDetectedTime(0) {}
 
 void LineSystem::setup() {
+    Serial.begin(9600);
     leftMotor.attach();
     rightMotor.attach();
 }
