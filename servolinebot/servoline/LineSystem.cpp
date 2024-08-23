@@ -29,23 +29,23 @@ void LineSystem::adjustMotors() {
     }
 
     if (leftOnLine && !rightOnLine) {
-        leftMotor.setSpeed(1520);  // Forward
-        rightMotor.setSpeed(1400); // Pivot right
+        leftMotor.setSpeed(1520);  //forward
+        rightMotor.setSpeed(1400); //pivot right
     } else if (!leftOnLine && rightOnLine) {
-        leftMotor.setSpeed(1600);  // Pivot left
-        rightMotor.setSpeed(1480); // Forward
+        leftMotor.setSpeed(1600);  //pivot left
+        rightMotor.setSpeed(1480); //forward
     } else if (leftOnLine && rightOnLine) {
-        leftMotor.setSpeed(1520);  // Move straight
-        rightMotor.setSpeed(1480); // Move straight
+        leftMotor.setSpeed(1520);  //move straight
+        rightMotor.setSpeed(1480); //move straight
     } else {
-        // If off the line for too long, refresh
+        //if off the line for too long, refresh
         if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
             (currentTime - lastRightDetectedTime > offLineThreshold)) {
-            leftMotor.setSpeed(1600);  // Pivot left
-            rightMotor.setSpeed(1400); // Pivot right
+            leftMotor.setSpeed(1600);  //pivot left
+            rightMotor.setSpeed(1400); //pivot right
         } else {
-            leftMotor.setSpeed(1500);  // Stop
-            rightMotor.setSpeed(1500); // Stop
+            leftMotor.setSpeed(1500);  //stop
+            rightMotor.setSpeed(1500); //stop
         }
     }
 }

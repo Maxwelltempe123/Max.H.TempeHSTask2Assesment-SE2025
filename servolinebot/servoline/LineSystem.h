@@ -17,7 +17,7 @@ private:
     LineSensor rightSensor;
     unsigned long lastLeftDetectedTime;
     unsigned long lastRightDetectedTime;
-    const unsigned long offLineThreshold = 500; // Time in ms
+    const unsigned long offLineThreshold = 500; 
 
     void adjustMotors();
 };
