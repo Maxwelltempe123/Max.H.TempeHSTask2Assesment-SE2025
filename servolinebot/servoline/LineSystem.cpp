@@ -37,21 +37,21 @@ void LineSystem::adjustMotors() {
     if (leftOnLine && !rightOnLine) {
         Serial.println("Pivoting Right");
         leftMotor.setSpeed(1520);
-        rightMotor.setSpeed(1400);
+        rightMotor.setSpeed(1460);
     } else if (!leftOnLine && rightOnLine) {
         Serial.println("Pivoting Left");
-        leftMotor.setSpeed(1550);
-        rightMotor.setSpeed(1420);
+        leftMotor.setSpeed(1600);
+        rightMotor.setSpeed(1480);
     } else if (leftOnLine && rightOnLine) {
         Serial.println("Moving Straight");
-        leftMotor.setSpeed(1550);
-        rightMotor.setSpeed(1450);
+        leftMotor.setSpeed(1520);
+        rightMotor.setSpeed(1460);
     } else {
         Serial.println("Off Line, Correcting");
         if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
             (currentTime - lastRightDetectedTime > offLineThreshold)) {
-            leftMotor.setSpeed(1550);
-            rightMotor.setSpeed(1450);
+            leftMotor.setSpeed(1600);
+            rightMotor.setSpeed(1400);
         } else {
             Serial.println("Stopping");
             leftMotor.setSpeed(1500);
