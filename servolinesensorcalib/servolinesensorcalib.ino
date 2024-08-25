@@ -1,6 +1,6 @@
 #include "LineSystem.h"
 
-LineSystem robotSystem(9, 10, A2, A3);
+LineSystem robotSystem(9, 10, A2, A3);//pins for servo and sensors
 
 void setup() {
     Serial.begin(9600);
@@ -8,13 +8,14 @@ void setup() {
     // Calibrate sensors at the start
     robotSystem.calibrateSensors();
 
-    // Optional: Check sensor readings
+    // Check sensor readings
     robotSystem.debugSensors();
 }
 
 void loop() {
+    //main system logic
     robotSystem.adjustMotors();
 
-    // Optional: Continuously debug sensors if needed
-    // robotSystem.debugSensors();
+    // Continuously debug sensors if needed
+    robotSystem.debugSensors();
 }

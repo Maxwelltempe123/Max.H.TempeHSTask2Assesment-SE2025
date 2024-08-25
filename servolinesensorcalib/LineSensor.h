@@ -5,8 +5,8 @@
 
 class LineSensor {
 private:
-    int pin;
-    int thresholdLow;
+    int pin;//analog pins
+    int thresholdLow;//thresholds for determining on and off line readings
     int thresholdHigh;
 
 public:

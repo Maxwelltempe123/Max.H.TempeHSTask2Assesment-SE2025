@@ -4,7 +4,7 @@ LineSystem::LineSystem(int leftMotorPin, int rightMotorPin, int leftSensorPin, i
     : leftMotor(leftMotorPin), rightMotor(rightMotorPin), leftSensor(leftSensorPin), rightSensor(rightSensorPin) {
     lastLeftDetectedTime = 0;
     lastRightDetectedTime = 0;
-    offLineThreshold = 500;  // Adjust this threshold as needed
+    offLineThreshold = 500;  // threshold
 }
 
 void LineSystem::calibrateSensors() {
@@ -22,21 +22,21 @@ void LineSystem::adjustMotors() {
     unsigned long currentTime = millis();
 
     if (leftOnLine && !rightOnLine) {
-        leftMotor.setSpeed(1520);  // Forward
-        rightMotor.setSpeed(1460);  // Forward
+        leftMotor.setSpeed(1500);  // stop
+        rightMotor.setSpeed(1490);  // Forward
         lastLeftDetectedTime = currentTime;
     } else if (!leftOnLine && rightOnLine) {
-        leftMotor.setSpeed(1600);  // Pivot right
-        rightMotor.setSpeed(1480);  // Forward
+        leftMotor.setSpeed(1600);  // forward
+        rightMotor.setSpeed(1500);  // stop
         lastRightDetectedTime = currentTime;
     } else if (leftOnLine && rightOnLine) {
-        leftMotor.setSpeed(1520);  // Forward
-        rightMotor.setSpeed(1460);  // Forward
+        leftMotor.setSpeed(1600);  // Forward
+        rightMotor.setSpeed(1490);  // Forward
     } else {
         if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
             (currentTime - lastRightDetectedTime > offLineThreshold)) {
             leftMotor.setSpeed(1600);  // Adjust as necessary for correction
-            rightMotor.setSpeed(1400); // Pivot or correct
+            rightMotor.setSpeed(1490); // Pivot or correct
         } else {
             leftMotor.setSpeed(1500);  // Stop
             rightMotor.setSpeed(1500); // Stop
