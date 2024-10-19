@@ -48,16 +48,14 @@ void LineSystem::adjustMotors() {
         rightMotor.setSpeed(1490);
     } else {
         Serial.println("Off Line, Correcting");
- }
+        if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
+            (currentTime - lastRightDetectedTime > offLineThreshold)) {
+            leftMotor.setSpeed(1600);
+            rightMotor.setSpeed(1490);
+        } else {
+            Serial.println("Stopping");
+            leftMotor.setSpeed(1500);
+            rightMotor.setSpeed(1500);
+        }
+    }
 }
-        //if ((currentTime - lastLeftDetectedTime > offLineThreshold) || 
-            //(currentTime - lastRightDetectedTime > offLineThreshold)) {
-            //leftMotor.setSpeed(1600);
-            //rightMotor.setSpeed(1490);
-        //} else {
-            //Serial.println("Stopping");
-            //leftMotor.setSpeed(1500);
-            //rightMotor.setSpeed(1500);
-        //}
-    //}
-//}
